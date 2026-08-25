@@ -1,0 +1,143 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #f5e9d5;
+  font-family: Georgia, serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Main envelope area */
+.scene {
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Envelope */
+.envelope {
+  width: 340px;
+  height: 230px;
+  background: #d9a66b;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+/* Envelope front */
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  background: #d9a66b;
+  z-index: 5;
+}
+
+/* Top flap */
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 170px solid transparent;
+  border-right: 170px solid transparent;
+  border-top: 125px solid #c78d55;
+  transform-origin: top center;
+  transition: transform 1s ease;
+  z-index: 8;
+}
+
+/* Newspaper */
+.letter {
+  position: absolute;
+  width: 300px;
+  height: 390px;
+  background: #f5eddb;
+  left: 20px;
+  bottom: -360px;
+  padding: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  transition: bottom 1.2s ease;
+  z-index: 3;
+  overflow: hidden;
+}
+
+/* Pull tab */
+.pull-tab {
+  position: absolute;
+  left: 50%;
+  bottom: 25px;
+  transform: translateX(-50%);
+  background: #8b4f35;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.pull-tab:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* Small arrow */
+.pull-tab::after {
+  content: " ↑";
+}
+
+/* When opened */
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+  bottom: 35px;
+}
+
+.envelope.open .pull-tab {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Little decoration */
+.bow {
+  position: absolute;
+  top: 135px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 35px;
+  z-index: 9;
+}
+
+/* Mobile */
+@media (max-width: 450px) {
+  .envelope {
+    width: 320px;
+    height: 220px;
+  }
+
+  .flap {
+    border-left-width: 160px;
+    border-right-width: 160px;
+  }
+
+  .letter {
+    width: 285px;
+  }
+  }i
