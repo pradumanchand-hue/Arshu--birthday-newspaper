@@ -1,28 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arshu Times ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Arshu Times ❤️</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,#f8e8d0,#ead1b0);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Georgia,serif;
+  overflow-x:hidden;
+}
+
+/* ---------- ENVELOPE ---------- */
+
+.container{
+  width:100%;
+  max-width:430px;
+  text-align:center;
+  padding:20px;
+}
+
+.envelope-area{
+  position:relative;
+  width:330px;
+  height:230px;
+  margin:30px auto;
+  perspective:1000px;
+}
+
+.envelope{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#f5dfbd;
+  border:2px solid #8d6849;
+  border-radius:8px;
+  box-shadow:0 15px 30px rgba(0,0,0,.2);
+}
+
+/* inside paper */
+.paper{
+  position:absolute;
+  width:82%;
+  height:85%;
+  background:#fffaf0;
+  left:9%;
+  top:8%;
+  border:1px solid #c5a47b;
+  transition:1s;
+  z-index:1;
+}
+
+/* flap */
+.flap{
+  position:absolute;
+  left:0;
+  top:0;
+  width:0;
+  height:0;
+  border-left:164px solid transparent;
+  border-right:164px solid transparent;
+  border-top:115px solid #dfbd91;
+  transform-origin:top;
+  transition:1s;
+  z-index:5;
+}
+
+/* bottom folds */
+.left-fold{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:0;
+  height:0;
+  border-top:115px solid transparent;
+  border-left:165px solid #e8cba5;
+  z-index:3;
+}
+
+.right-fold{
+  position:absolute;
+  bottom:0;
+  right:0;
+  width:0;
+  height:0;
+  border-top:115px solid transparent;
+  border-right:165px solid #e8cba5;
+  z-index:3;
+}
+
+/* pull tab */
+.pull-tab{
+  position:absolute;
+  right:-35px;
+  top:92px;
+  background:#b34747;
+  color:white;
+  padding:9px 13px;
+  border-radius:0 8px 8px 0;
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  font-weight:bold;
+  cursor:pointer;
+  z-index:10;
+  box-shadow:3px 4px 8px rgba(0,0,0,.25);
+  animation:pulse 1.5s infinite;
+}
+
+.pull-tab::before{
+  content:"";
+  position:absolute;
+  left:-18px;
+  top:12px;
+  width:20px;
+  height:2px;
+  background:#b34747;
+}
+
+@keyframes pulse{
+  0%,100%{transform:translateX(0);}
+  50%{transform:translateX(6px);}
+}
+
+/* opened state */
+
+.open .flap{
+  transform:rotateX(180deg);
+  z-index:0;
+}
+
+.open .paper{
+  transform:translateY(-100px);
+}
+
+/* ---------- MESSAGE ---------- */
+
+.title{
+  color:#4b3022;
+  font-size:28px;
+  margin-bottom:5px;
+}
+
+.subtitle{
+  color:#735440;
+  font-size:15px;
+}
+
+/* ---------- NEWSPAPER ---------- */
+
+.newspaper{
+  display:none;
+  margin:30px auto;
+  animation:appear 1.2s ease;
+}
+
+.newspaper img{
+  width:100%;
+  max-width:390px;
+  border-radius:3px;
+  box-shadow:0 12px 35px rgba(0,0,0,.3);
+}
+
+@keyframes appear{
+  from{
+    opacity:0;
+    transform:translateY(80px) scale(.85);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.hint{
+  margin-top:20px;
+  color:#694b38;
+  font-size:14px;
+}
+</style>
 </head>
 
 <body>
 
-  <h1>ARSHU TIMES</h1>
-  <p>Something special is waiting for you... 👀</p>
+<div class="container">
 
-  <button onclick="openGift()">OPEN MY BIRTHDAY SURPRISE 💌</button>
-
-  <div id="gift" style="display:none;">
-    <h2>🎉 HAPPY 20TH BIRTHDAY ARSHU! 🎉</h2>
-    <p>Pull to reveal your special newspaper 📰❤️</p>
+  <div class="title">
+    ARSHU TIMES ❤️
   </div>
 
-  <script>
-    function openGift() {
-      document.getElementById("gift").style.display = "block";
-    }
-  </script>
+  <div class="subtitle">
+    Something special is waiting for you... 🥹
+  </div>
+
+  <div class="envelope-area" id="envelopeArea">
+
+    <div class="envelope">
+
+      <div class="paper"></div>
+
+      <div class="left-fold"></div>
+      <div class="right-fold"></div>
+
+      <div class="flap"></div>
+
+      <div class="pull-tab" onclick="openEnvelope()">
+        PULL →
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="hint">
+    ✨ Pull the tiny tab to open your surprise ✨
+  </div>
+
+  <div class="newspaper" id="newspaper">
+
+    <h2>🥹 HAPPY 20TH BIRTHDAY ARSHU! ❤️</h2>
+
+    <img src="newspaper.png" alt="Arshu Times Birthday Newspaper">
+
+    <p>
+      20 years of you… and somehow,  
+      the best chapters are still ahead. 🫶
+    </p>
+
+  </div>
+
+</div>
+
+<script>
+
+function openEnvelope(){
+
+  const envelope =
+    document.getElementById("envelopeArea");
+
+  envelope.classList.add("open");
+
+  document.querySelector(".pull-tab").style.display="none";
+
+  setTimeout(function(){
+
+    document.getElementById("newspaper").style.display="block";
+
+    document.getElementById("newspaper")
+      .scrollIntoView({
+        behavior:"smooth"
+      });
+
+  },1200);
+
+}
+
+</script>
 
 </body>
 </html>
